@@ -10,5 +10,8 @@ screenshot-area-selection.o: screenshot-area-selection.c screenshot-area-selecti
 
 shutter.o: shutter.c screenshot-area-selection.h
 	$(CC) $(CFLAGS) -o shutter.o -c shutter.c $(LIBS)
+install:
+	mkdir -p $(DESTDIR)/usr/bin
+	cp shutter $(DESTDIR)/usr/bin
 clean:
 	rm -rf *.o shutter

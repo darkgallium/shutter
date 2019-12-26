@@ -88,7 +88,6 @@ int main(int argc, char *argv[]) {
 
 	strftime(name, sizeof(name), "%F-%T", localtime(&now));
 	sprintf(path, "%s/%s.%s", folder, name, type);
-	printf("%s\n", path);
 
 	if (mode == 0) {
 		whole_screen_screenshot(path, type);
