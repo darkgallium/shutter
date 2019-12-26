@@ -1,7 +1,10 @@
 #ifndef SCREENSHOT_AREA_SELECT_H
-#include <gdk/gdk.h>
+#define SCREENSHOT_AREA_SELECT_H
 
-typedef void (* SelectAreaCallback) (GdkRectangle *rectangle, char *filename, char *type);
+#include <gdk/gdk.h>
+#include "shutter.h"
+
+typedef void (* SelectAreaCallback) (GdkRectangle *rectangle, struct screenshot_args *args);
 
 typedef struct {
   GdkRectangle rectangle;
@@ -9,6 +12,6 @@ typedef struct {
   gboolean aborted;
 } CallbackData;
 
-void screenshot_select_area_x11 (SelectAreaCallback callback, char *filename, char *type);
+void screenshot_select_area_x11 (SelectAreaCallback callback, struct screenshot_args *args);
 
 #endif

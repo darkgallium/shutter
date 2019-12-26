@@ -187,7 +187,7 @@ static GtkWidget* create_select_window (void) {
   return window;
 }
 
-void screenshot_select_area_x11 (SelectAreaCallback callback, char *filename, char *type) {
+void screenshot_select_area_x11 (SelectAreaCallback callback, struct screenshot_args *args) {
   CallbackData *cb_data;
   cb_data = g_slice_new0 (CallbackData);
   cb_data->callback = callback;
@@ -238,7 +238,6 @@ void screenshot_select_area_x11 (SelectAreaCallback callback, char *filename, ch
       gdk_device_ungrab (pointer, GDK_CURRENT_TIME);
       goto out;
     }
-
   gtk_main ();
 
   gdk_device_ungrab(pointer, GDK_CURRENT_TIME);
@@ -252,9 +251,9 @@ void screenshot_select_area_x11 (SelectAreaCallback callback, char *filename, ch
   cb_data->rectangle = data.rect;
 
   if (!cb_data->aborted)
-    cb_data->callback (&cb_data->rectangle, filename, type);
+    cb_data->callback (&cb_data->rectangle, args);
   else
-    cb_data->callback (NULL, NULL, NULL);
+    cb_data->callback (NULL, args);
  
   g_slice_free(CallbackData, cb_data);
 }
